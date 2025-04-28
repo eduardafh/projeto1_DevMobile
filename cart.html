@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carrinho - Project-01-EGNY</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body id="app">
+  <div class="container-nav">
+    <div><a href="index.html" class="button">← Continuar Comprando</a></div>
+  </div>
+
+  <div id="container">
+    <h1>Carrinho de Compras 🛒</h1>
+    <div v-if="cartItems.length === 0">
+      <p>Seu carrinho está vazio!</p>
+    </div>
+    <div v-else>
+      <div v-for="(item, index) in cartItems" :key="item.id" class="cart-item">
+        <img :src="item.image" alt="Produto" style="width: 100px;">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
+        <p>Quantidade: {{ item.quantity }}</p>
+        <button @click="removeFromCart(index)" class="button">Remover</button>
+      </div>
+      <hr>
+      <h2>Total de Itens: {{ totalItems }}</h2>
+      <button @click="checkout" class="button">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref, computed } = Vue;
+
+    createApp({
+      setup() {
+        const cartItems = ref([]);
+
+        const loadCart = () => {
+          const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+          cartItems.value = storedCart;
+        };
+
+        const totalItems = computed(() => {
+          return cartItems.value.reduce((sum, item) => sum + item.quantity, 0);
+        });
+
+        const removeFromCart = (index) => {
+          cartItems.value.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cartItems.value));
+        };
+
+        const checkout = () => {
+          alert('Compra finalizada! 🛒✅');
+          localStorage.removeItem('cart');
+          cartItems.value = [];
+        };
+
+        loadCart();
+
+        return {
+          cartItems,
+          totalItems,
+          removeFromCart,
+          checkout
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
