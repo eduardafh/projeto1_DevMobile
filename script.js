@@ -51,6 +51,24 @@ createApp({
                 image: 'assets/images/image7.png',
                 inStock: 10
             },
+            {
+                title: 'Produto 8',
+                description: 'Descrição do Produto 8',
+                image: 'assets/images/image8.jpeg',
+                inStock: 10
+            },
+            {
+                title: 'Produto 9',
+                description: 'Descrição do Produto 9',
+                image: 'assets/images/image9.jpeg',
+                inStock: 10
+            },
+            {
+                title: 'Produto 10',
+                description: 'Descrição do Produto 10',
+                image: 'assets/images/image10.jpeg',
+                inStock: 10
+            }
         ]);
 
         return {
@@ -59,4 +77,4 @@ createApp({
             addToCart
         };
     }
-}).mount('#container');
+}).mount('#app');

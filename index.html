@@ -8,17 +8,23 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body id="app">
     <div class="container-nav">
         <div> <img src="assets/images/South.jpg" alt="" class="img"></div>
         <div>
     <a href="index.html" id="a">Produtos</a>
 </div>
-   <div><a href=""> <img src="https://static.vecteezy.com/system/resources/previews/017/196/580/large_2x/shopping-cart-icon-on-transparent-background-free-png.png" alt="" class="cart-img"></a></div>
-    </div>
+   <div class="cart-area">
+       <img
+         src="https://static.vecteezy.com/system/resources/previews/017/196/580/large_2x/shopping-cart-icon-on-transparent-background-free-png.png"
+         alt=""
+         class="cart-img"/>
+         <span class="cart-badge" v-if="cart > 0"> {{ cart }} </span>
+   </div>
+ </div>
+
 
     <div id="container">
-        <div class="cart">Cart: {{ cart }}</div>
         <div class="product-display">
             <div 
                 class="product-container" 
