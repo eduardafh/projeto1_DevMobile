@@ -4,6 +4,27 @@ createApp({
   setup() {
     const cart = ref(0);
 
+    const addToCart = (product) => {
+      cart.value += 1;
+      let storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingItem = storedCart.find((item) => item.id === product.id);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        storedCart.push({
+          id: product.id,
+          title: product.title,
+          description: product.description,
+          image: product.image,
+          quantity: 1,
+        });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(storedCart));
+    };
+
     const products = ref([
       {
         id: 1,
@@ -76,36 +97,6 @@ createApp({
         inStock: 10,
       },
     ]);
-
-    const addToCart = (product) => {
-      let storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-      const existingItem = storedCart.find((item) => item.id === product.id);
-
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        storedCart.push({
-          id: product.id,
-          title: product.title,
-          description: product.description,
-          image: product.image,
-          quantity: 1,
-        });
-      }
-
-      localStorage.setItem("cart", JSON.stringify(storedCart));
-
-      cart.value = storedCart.reduce((sum, item) => sum + item.quantity, 0);
-      alert("Produto adicionado ao carrinho! ✅");
-    };
-
-    const loadCart = () => {
-      const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.value = storedCart.reduce((sum, item) => sum + item.quantity, 0);
-    };
-
-    loadCart();
 
     return {
       cart,
