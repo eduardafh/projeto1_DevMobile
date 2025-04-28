@@ -8,22 +8,28 @@
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body id="app">
-  <div class="container-nav">
-    <div><a href="index.html" class="button">← Continuar Comprando</a></div>
+  <!-- NAVBAR -->
+ <div class="container-nav">
+  <div>
+    <img src="assets/images/South.jpg" alt="" class="img">
   </div>
+  <div>
+    <a href="index.html" id="a">Produtos</a>
+  </div>
+</div>
 
   <div id="container">
     <h1>Carrinho de Compras 🛒</h1>
     <div v-if="cartItems.length === 0">
-      <p>Seu carrinho está vazio!</p>
+      <p style="margin-left: 15%;">Seu carrinho está vazio!</p>
     </div>
     <div v-else>
       <div v-for="(item, index) in cartItems" :key="item.id" class="cart-item">
-        <img :src="item.image" alt="Produto" style="width: 100px;">
-        <h2>{{ item.title }}</h2>
-        <p>{{ item.description }}</p>
-        <p>Quantidade: {{ item.quantity }}</p>
-        <button @click="removeFromCart(index)" class="button">Remover</button>
+        <img :src="item.image" alt="Produto" style="width: 100px;" class="img-in-cart">
+        <h2 class="item-cart-title">{{ item.title }}</h2>
+        <p class="item-descricao">{{ item.description }}</p>
+        <p class="item-quantidade">Quantidade: {{ item.quantity }}</p>
+        <button @click="removeFromCart(index)" class="button-cart">Remover</button>
       </div>
       <hr>
       <h2>Total de Itens: {{ totalItems }}</h2>
